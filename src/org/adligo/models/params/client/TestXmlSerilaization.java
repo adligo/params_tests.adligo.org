@@ -1,5 +1,11 @@
 package org.adligo.models.params.client;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.nio.CharBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +28,15 @@ public class TestXmlSerilaization extends ATest {
 		if (log.isDebugEnabled()) {
 			log.debug("wrote \n"  + asXml);
 		}
+		
+		URL url = this.getClass().getResource("serliaization.txt");
+		File inputFile = new File(url.getFile());
+        FileReader in = new FileReader(inputFile);
+        char c[] = new char[(char)inputFile.length()];
+        in.read(c);
+	    String content = new String(c);
+		
+		assertEquals(asXml, content);
 		/*
 		I_LogMutant log = (I_LogMutant) LogFactory.getLog(Param.class);
 		log.setLevel(DeferredLog.LOG_LEVEL_DEBUG);
