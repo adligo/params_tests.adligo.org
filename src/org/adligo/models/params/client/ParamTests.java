@@ -37,6 +37,10 @@ public class ParamTests extends ATest {
 		assertValues(new Object[] {new Date(0)}, param);
 		assertValueTypes(new short[] {ValueTypes.DATE}, param);
 		
+		param.setValue(true);
+		assertValues(new Object[] {true}, param);
+		assertValueTypes(new short[] {ValueTypes.BOOLEAN}, param);
+		
 		param = new Param();
 		param.addValue("str");
 		param.addValue("str");
@@ -79,6 +83,13 @@ public class ParamTests extends ATest {
 		param.addValue(new Date(100));
 		assertValues(new Object[] {new Date(0),new Date(100)}, param);
 		assertValueTypes(new short[] {ValueTypes.DATE, ValueTypes.DATE}, param);
+		
+		param = new Param();
+		param.addValue(true);
+		param.addValue(false);
+		assertValues(new Object[] {true, false}, param);
+		assertValueTypes(new short[] {ValueTypes.BOOLEAN, 
+					ValueTypes.BOOLEAN}, param);
 		
 	}
 
