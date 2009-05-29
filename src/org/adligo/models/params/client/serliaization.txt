@@ -14,7 +14,7 @@
                <object>&lt;</object>
             </object>
             <object name="values" >
-               <object class="null">1.1</object>
+               <object class="Double">1.1</object>
             </object>
          </object>
          <object class="Param" version="1.5" name="Long">
@@ -50,7 +50,16 @@
                <object>&gt;</object>
             </object>
             <object name="values" >
-               <object class="Double">10</object>
+               <object class="Short">10</object>
+            </object>
+         </object>
+         <object class="Param" version="1.5" name="Boolean">
+            <object name="operators">
+               <object>NOT</object>
+               <object>IN</object>
+            </object>
+            <object name="values" >
+               <object class="Boolean">true</object>
             </object>
          </object>
          <object class="Param" version="1.5" name="Integer">

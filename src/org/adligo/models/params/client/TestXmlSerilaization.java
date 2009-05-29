@@ -49,7 +49,8 @@ public class TestXmlSerilaization extends ATest {
 		if (log.isDebugEnabled()) {
 			log.debug("read in to \n\n\n"  + newParams.writeXML());
 		}
-		assertTrue(params.equals(newParams));
+		//assertEquals(params.writeXML(), newParams.writeXML());
+		assertEquals(params, newParams);
 	}
 	
 	public void testStringParamSerilaization() throws Exception {
@@ -117,7 +118,95 @@ public class TestXmlSerilaization extends ATest {
 		if (log.isDebugEnabled()) {
 			log.debug("read in to \n\n\n"  + newParams.writeXML());
 		}
-		assertTrue(params.equals(newParams));
+		assertEquals(params, newParams);
+	}
+	
+	public void testDoubleParamSerilaization() throws Exception {
+		I_TemplateParams params = getDoubleParam();
+		
+		String asXml = params.writeXML();
+		if (log.isDebugEnabled()) {
+			log.debug("wrote \n"  + asXml);
+		}
+		/*
+		I_LogMutant log = (I_LogMutant) LogFactory.getLog(Param.class);
+		log.setLevel(DeferredLog.LOG_LEVEL_DEBUG);
+		*/
+		Object result = XMLObject.readXML(asXml);
+		assertTrue(result instanceof Param);
+		Param newParams = (Param) result;
+
+
+		if (log.isDebugEnabled()) {
+			log.debug("read in to \n\n\n"  + newParams.writeXML());
+		}
+		assertEquals(params, newParams);
+	}
+	
+	public void testFloatParamSerilaization() throws Exception {
+		I_TemplateParams params = getFloatParam();
+		
+		String asXml = params.writeXML();
+		if (log.isDebugEnabled()) {
+			log.debug("wrote \n"  + asXml);
+		}
+		/*
+		I_LogMutant log = (I_LogMutant) LogFactory.getLog(Param.class);
+		log.setLevel(DeferredLog.LOG_LEVEL_DEBUG);
+		*/
+		Object result = XMLObject.readXML(asXml);
+		assertTrue(result instanceof Param);
+		Param newParams = (Param) result;
+
+
+		if (log.isDebugEnabled()) {
+			log.debug("read in to \n\n\n"  + newParams.writeXML());
+		}
+		assertEquals(params, newParams);
+	}
+	
+	public void testShortParamSerilaization() throws Exception {
+		I_TemplateParams params = getShortParam();
+		
+		String asXml = params.writeXML();
+		if (log.isDebugEnabled()) {
+			log.debug("wrote \n"  + asXml);
+		}
+		/*
+		I_LogMutant log = (I_LogMutant) LogFactory.getLog(Param.class);
+		log.setLevel(DeferredLog.LOG_LEVEL_DEBUG);
+		*/
+		Object result = XMLObject.readXML(asXml);
+		assertTrue(result instanceof Param);
+		Param newParams = (Param) result;
+
+
+		if (log.isDebugEnabled()) {
+			log.debug("read in to \n\n\n"  + newParams.writeXML());
+		}
+		assertEquals(params, newParams);
+	}
+	
+	public void testBooleanParamSerilaization() throws Exception {
+		I_TemplateParams params = getBooleanParam();
+		
+		String asXml = params.writeXML();
+		if (log.isDebugEnabled()) {
+			log.debug("wrote \n"  + asXml);
+		}
+		/*
+		I_LogMutant log = (I_LogMutant) LogFactory.getLog(Param.class);
+		log.setLevel(DeferredLog.LOG_LEVEL_DEBUG);
+		*/
+		Object result = XMLObject.readXML(asXml);
+		assertTrue(result instanceof Param);
+		Param newParams = (Param) result;
+
+
+		if (log.isDebugEnabled()) {
+			log.debug("read in to \n\n\n"  + newParams.writeXML());
+		}
+		assertEquals(params, newParams);
 	}
 	
 	public I_MultipleParamsObject getParams() throws ParseException {
@@ -150,9 +239,18 @@ public class TestXmlSerilaization extends ATest {
 		whereParams.addParam(getLongParam());
 		whereParams.addParam(getShortParam());
 		whereParams.addParam(getDateParam());
+		whereParams.addParam(getBooleanParam());
 		return params;
 	}
 
+	public Param getBooleanParam() {
+		Param stringParam = new Param();
+		stringParam.setName("Boolean");
+		stringParam.setOperators(new String [] {"NOT", "IN"});
+		stringParam.addValue(true);
+		return stringParam;
+	}
+	
 	public Param getStringParam() {
 		Param stringParam = new Param();
 		stringParam.setName("String");
