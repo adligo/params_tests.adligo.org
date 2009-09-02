@@ -27,7 +27,11 @@ public class TestXmlSerilaization extends ATest {
         byte b[] = new byte[1];
 
         while ( is.read(b) != -1 ) {
-        	str.append(new String(b));
+        	if (b[0] == '\n') {
+        		str.append(XMLBuilder.DOS_LINE_FEED);
+        	} else if (b[0] != '\r') {
+        		str.append(new String(b));
+        	}
         }
         is.close();
         String content = str.toString();
