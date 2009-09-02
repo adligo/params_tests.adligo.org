@@ -28,13 +28,16 @@ public class TestXmlSerilaization extends ATest {
 		if (log.isDebugEnabled()) {
 			log.debug("wrote \n"  + asXml);
 		}
-		
 		URL url = this.getClass().getResource("/org/adligo/models/params/client/serliaization.txt");
-		File inputFile = new File(url.getFile());
-        FileReader in = new FileReader(inputFile);
-        char c[] = new char[(char)inputFile.length()];
-        in.read(c);
-	    String content = new String(c);
+		InputStream is = url.openStream();
+		StringBuilder str = new StringBuilder();
+        byte b[] = new byte[1];
+
+        while ( is.read(b) != -1 ) {
+            str.append(new String(b));
+        }
+        is.close();
+        String content = str.toString();
 		
 		assertEquals(asXml, content);
 		/*
