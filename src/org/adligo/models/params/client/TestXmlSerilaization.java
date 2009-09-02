@@ -29,7 +29,7 @@ public class TestXmlSerilaization extends ATest {
 			log.debug("wrote \n"  + asXml);
 		}
 		
-		URL url = this.getClass().getResource("serliaization.txt");
+		URL url = this.getClass().getResource("/org/adligo/models/params/client/serliaization.txt");
 		File inputFile = new File(url.getFile());
         FileReader in = new FileReader(inputFile);
         char c[] = new char[(char)inputFile.length()];
