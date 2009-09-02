@@ -1,17 +1,10 @@
 package org.adligo.models.params.client;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
-import java.nio.CharBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import org.adligo.i.log.client.DeferredLog;
-import org.adligo.i.log.client.I_LogMutant;
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.tests.ATest;
@@ -34,7 +27,7 @@ public class TestXmlSerilaization extends ATest {
         byte b[] = new byte[1];
 
         while ( is.read(b) != -1 ) {
-            str.append(new String(b));
+        	str.append(new String(b));
         }
         is.close();
         String content = str.toString();
