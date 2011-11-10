@@ -1,5 +1,7 @@
 package org.adligo.models.params.client;
 
+import java.util.Date;
+
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.tests.ATest;
@@ -65,5 +67,12 @@ public class ParserTests extends ATest {
 	
 	public void logIntArray(int [] p) {
 		log.warn(p[0] + "," + p[1]);
+	}
+	
+	public void testGetContent() {
+		String xmlChunk = "<object class=\"Param\" version=\"1.5\" name=\"StartRow\">" +
+		"123</object>";			
+		String content = Parser.getContent(xmlChunk, XMLObject.OBJECT_HEADER,XMLObject.OBJECT_ENDER);
+		assertEquals("123", content);
 	}
 }

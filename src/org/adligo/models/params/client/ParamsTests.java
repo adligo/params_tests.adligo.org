@@ -75,4 +75,6 @@ public class ParamsTests extends ATest {
 		assertEquals(1, values.length);
 		assertEquals(new Date(new Long(1929)), values[0]);			
 	}
+	
+
 }
