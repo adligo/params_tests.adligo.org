@@ -133,23 +133,23 @@ public class Base64Tests extends ATest {
 		
 		bytes = toBytes(new int [] {0, 1});
 		encoded = Base64.encode(bytes);
-		assertEquals("AAB=", encoded);
+		assertEquals("AAE=", encoded);
 		
 		bytes = toBytes(new int [] {0, 2});
 		encoded = Base64.encode(bytes);
-		assertEquals("AAC=", encoded);
+		assertEquals("AAI=", encoded);
 		
 		bytes = toBytes(new int [] {0, 3});
 		encoded = Base64.encode(bytes);
-		assertEquals("AAD=", encoded);
+		assertEquals("AAM=", encoded);
 		
 		bytes = toBytes(new int [] {0, 4});
 		encoded = Base64.encode(bytes);
-		assertEquals("AAE=", encoded);
+		assertEquals("AAQ=", encoded);
 		
 		bytes = toBytes(new int [] {0, 15});
 		encoded = Base64.encode(bytes);
-		assertEquals("AAP=", encoded);
+		assertEquals("AA8=", encoded);
 		
 		bytes = toBytes(new int [] {0, 16});
 		encoded = Base64.encode(bytes);
@@ -157,68 +157,27 @@ public class Base64Tests extends ATest {
 		
 		bytes = toBytes(new int [] {0, 17});
 		encoded = Base64.encode(bytes);
-		assertEquals("ABB=", encoded);
+		assertEquals("ABE=", encoded);
 		
 		bytes = toBytes(new int [] {0, 18});
 		encoded = Base64.encode(bytes);
-		assertEquals("ABC=", encoded);
+		assertEquals("ABI=", encoded);
 		
 		bytes = toBytes(new int [] {1, 1});
 		encoded = Base64.encode(bytes);
-		assertEquals("AQB=", encoded);
+		assertEquals("AQE=", encoded);
 		
 		bytes = toBytes(new int [] {1, 2});
 		encoded = Base64.encode(bytes);
-		assertEquals("AQC=", encoded);
+		assertEquals("AQI=", encoded);
 		
 		bytes = toBytes(new int [] {2, 1});
 		encoded = Base64.encode(bytes);
-		assertEquals("AgB=", encoded);
+		assertEquals("AgE=", encoded);
 		
 		bytes = toBytes(new int [] {2, 2});
 		encoded = Base64.encode(bytes);
-		assertEquals("AgC=", encoded);
-		
-		bytes = toBytes(11);
-		encoded = Base64.encode(bytes);
-		assertEquals("Cw==", encoded);
-		
-		bytes = toBytes(12);
-		encoded = Base64.encode(bytes);
-		assertEquals("DA==", encoded);
-		
-		bytes = toBytes(13);
-		encoded = Base64.encode(bytes);
-		assertEquals("DQ==", encoded);
-		
-		bytes = toBytes(14);
-		encoded = Base64.encode(bytes);
-		assertEquals("Dg==", encoded);
-		
-		bytes = toBytes(15);
-		encoded = Base64.encode(bytes);
-		assertEquals("Dw==", encoded);
-		
-		bytes = toBytes(16);
-		encoded = Base64.encode(bytes);
-		assertEquals("EA==", encoded);
-		
-		
-		bytes = toBytes(17);
-		encoded = Base64.encode(bytes);
-		assertEquals("EQ==", encoded);
-		
-		bytes = toBytes(18);
-		encoded = Base64.encode(bytes);
-		assertEquals("Eg==", encoded);
-		
-		bytes = toBytes(19);
-		encoded = Base64.encode(bytes);
-		assertEquals("Ew==", encoded);
-		
-		bytes = toBytes(20);
-		encoded = Base64.encode(bytes);
-		assertEquals("FA==", encoded);
+		assertEquals("AgI=", encoded);
 	}
 
 	static byte toUnsignedByte(int p) {
@@ -229,19 +188,14 @@ public class Base64Tests extends ATest {
 	}
 
 	
-	public void testWikipediaExamples() throws Exception {
+	public void testEncodeWikipediaExamples() throws Exception {
 		String input = new String("pleasure.".getBytes("ASCII"), "ASCII");
 		String output = Base64.encode(input);
 		assertEquals("cGxlYXN1cmUu", output);
 		
 		input = new String("leasure.".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
-		//i actually think the wikipedia article is wrong here
-		// the period ASCII hex is 2e
-		// which equates to 0010 0111
-		// also it has 56->char(4)
-		// and the highest a 4 bit number could get is 8+4+2+1=15
-		assertEquals("bGVhc3VyZSO=", output);
+		assertEquals("bGVhc3VyZS4=", output);
 		
 		input = new String("easure.".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
@@ -253,13 +207,11 @@ public class Base64Tests extends ATest {
 		
 		input = new String("sure.".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
-		assertEquals("c3VyZSO=", output);
+		assertEquals("c3VyZS4=", output);
 		
-		
-		//
 		input = new String("any carnal pleasure.".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
-		assertEquals("YW55IGNhcm5hbCBwbGVhc3VyZSO=", output);
+		assertEquals("YW55IGNhcm5hbCBwbGVhc3VyZS4=", output);
 		
 		input = new String("any carnal pleasure".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
@@ -268,21 +220,213 @@ public class Base64Tests extends ATest {
 		input = new String("any carnal pleasur".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
 		assertEquals("YW55IGNhcm5hbCBwbGVhc3Vy", output);
-		//according to 
-		//http://www.robelle.com/smugbook/ascii.html
-		//the hex for u is 75
-		//or 01110101 as a binary string and 5 is F according to the charstrings
-		// which should match with the BASE_64_CHARS
+
 		input = new String("su".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
-		assertEquals("c3F=", output);
+		assertEquals("c3U=", output);
 		
 		input = new String("any carnal pleasu".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
-		assertEquals("YW55IGNhcm5hbCBwbGVhc3F=", output);
+		assertEquals("YW55IGNhcm5hbCBwbGVhc3U=", output);
 		
 		input = new String("any carnal pleas".getBytes("ASCII"), "ASCII");
 		output = Base64.encode(input);
 		assertEquals("YW55IGNhcm5hbCBwbGVhcw==", output);
+	}
+	
+	
+	public void testSingleByteDecode() {
+		
+		byte [] bytes = Base64.decode("AA==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		
+		bytes = Base64.decode("AQ==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 1, bytes[0]);
+		
+		
+		bytes = Base64.decode("Ag==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 2, bytes[0]);
+		
+		bytes = Base64.decode("Aw==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 3, bytes[0]);
+		
+		bytes = Base64.decode("BA==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 4, bytes[0]);
+		
+		bytes = Base64.decode("BQ==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 5, bytes[0]);
+		
+		bytes = Base64.decode("Bg==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 6, bytes[0]);
+		
+		bytes = Base64.decode("Bw==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 7, bytes[0]);
+		
+		bytes = Base64.decode("CA==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 8, bytes[0]);
+		
+		bytes = Base64.decode("CQ==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 9, bytes[0]);
+		
+		bytes = Base64.decode("Cg==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 10, bytes[0]);
+		
+		bytes = Base64.decode("Cw==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 11, bytes[0]);
+		
+		bytes = Base64.decode("DA==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 12, bytes[0]);
+		
+		bytes = Base64.decode("DQ==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 13, bytes[0]);
+		
+		bytes = Base64.decode("Dg==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 14, bytes[0]);
+		
+		bytes = Base64.decode("Dw==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 15, bytes[0]);
+		
+		bytes = Base64.decode("EA==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 16, bytes[0]);
+		
+		bytes = Base64.decode("EQ==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 17, bytes[0]);
+		
+		bytes = Base64.decode("Eg==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 18, bytes[0]);
+		
+		bytes = Base64.decode("Ew==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 19, bytes[0]);
+		
+		bytes = Base64.decode("FA==");
+		assertEquals(1, bytes.length);
+		assertEquals((byte) 20, bytes[0]);
+		
+	}
+	
+	
+	public void testDoubleByteDecode() {
+		
+		byte [] bytes = Base64.decode("AAA=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 0, bytes[1]);
+		
+		bytes = Base64.decode("AAE=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 1, bytes[1]);
+
+		bytes = Base64.decode("AAI=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 2, bytes[1]);
+		
+		bytes = Base64.decode("AAM=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 3, bytes[1]);
+		
+		bytes = Base64.decode("AAQ=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 4, bytes[1]);
+		
+		bytes = Base64.decode("AA8=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 15, bytes[1]);
+		
+		bytes = Base64.decode("ABA=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 16, bytes[1]);
+		
+		bytes = Base64.decode("ABE=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 17, bytes[1]);
+		
+		bytes = Base64.decode("ABI=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 0, bytes[0]);
+		assertEquals((byte) 18, bytes[1]);
+		
+		bytes = Base64.decode("AQE=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 1, bytes[0]);
+		assertEquals((byte) 1, bytes[1]);
+		
+		bytes = Base64.decode("AQI=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 1, bytes[0]);
+		assertEquals((byte) 2, bytes[1]);
+		
+		bytes = Base64.decode("AgE=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 2, bytes[0]);
+		assertEquals((byte) 1, bytes[1]);
+		
+		bytes = Base64.decode("AgI=");
+		assertEquals(2, bytes.length);
+		assertEquals((byte) 2, bytes[0]);
+		assertEquals((byte) 2, bytes[1]);
+		
+	}
+	
+	public void testDecodeWikipediaExamples() throws Exception {
+		byte [] bytes = Base64.decode("cGxlYXN1cmUu");
+		assertEquals("pleasure.", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("bGVhc3VyZS4=");
+		assertEquals("leasure.", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("ZWFzdXJlLg==");
+		assertEquals("easure.", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("YXN1cmUu");
+		assertEquals("asure.", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("c3VyZS4=");
+		assertEquals("sure.", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("YW55IGNhcm5hbCBwbGVhc3VyZS4=");
+		assertEquals("any carnal pleasure.", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("YW55IGNhcm5hbCBwbGVhc3VyZQ==");
+		assertEquals("any carnal pleasure", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("YW55IGNhcm5hbCBwbGVhc3Vy");
+		assertEquals("any carnal pleasur", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("c3U=");
+		assertEquals("su", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("YW55IGNhcm5hbCBwbGVhc3U=");
+		assertEquals("any carnal pleasu", new String(bytes, "ASCII"));
+		
+		bytes = Base64.decode("YW55IGNhcm5hbCBwbGVhcw==");
+		assertEquals("any carnal pleas", new String(bytes, "ASCII"));
+		
 	}
 }
