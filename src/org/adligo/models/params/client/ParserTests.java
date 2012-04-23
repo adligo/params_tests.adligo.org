@@ -146,8 +146,8 @@ public class ParserTests extends ATest {
 	public void testGetTagMalformedNoEndTag() {
 		
 		TagInfo result = Parser.getNextTagInfo(
-				"<foo><bar><see></bar></foo>", 6, 23);
-		assertEquals("see", result.getTagName());
+				"<foo><bar><foo></bar></foo>", 6, 23);
+		assertEquals("foo", result.getTagName());
 		assertEquals(false, result.hasEndTag());
 		assertEquals(10, result.getStartTagStartIndex());
 		assertEquals(14, result.getStartTagEndIndex());
