@@ -168,6 +168,7 @@ public class ParserTests extends ATest {
 		assertEquals(26, result.getEnderEnd());
 	}
 	
+
 	public void testGetTagNestedTags() {
 		
 		TagInfo result = Parser.getNextTagInfo(
