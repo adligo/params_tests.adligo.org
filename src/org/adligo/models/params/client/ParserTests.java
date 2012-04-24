@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
+import org.adligo.i.util.client.I_Iterator;
 import org.adligo.tests.ATest;
 
 public class ParserTests extends ATest {
@@ -91,44 +92,56 @@ public class ParserTests extends ATest {
 		
 		TagInfo result = Parser.getNextTagInfo("<foo/>", 0);
 		assertEquals("foo", result.getTagName());
-		assertEquals(false, result.hasEndTag());
-		assertEquals(0, result.getStartTagStartIndex());
-		assertEquals(5, result.getStartTagEndIndex());
+		assertEquals(false, result.hasEnder());
+		assertEquals(0, result.getHeaderStart());
+		assertEquals(5, result.getHeaderEnd());
 		
 		result = Parser.getNextTagInfo("<foobar/><bar/>", 0);
 		assertEquals("foobar", result.getTagName());
-		assertEquals(false, result.hasEndTag());
-		assertEquals(0, result.getStartTagStartIndex());
-		assertEquals(8, result.getStartTagEndIndex());
+		assertEquals(false, result.hasEnder());
+		assertEquals(0, result.getHeaderStart());
+		assertEquals(8, result.getHeaderEnd());
 	}
 	
 	public void testGetTagNextInfoTagWithEnder() {
 		
 		TagInfo result = Parser.getNextTagInfo("<foo></foo>", 0);
 		assertEquals("foo", result.getTagName());
-		assertEquals(true, result.hasEndTag());
-		assertEquals(0, result.getStartTagStartIndex());
-		assertEquals(4, result.getStartTagEndIndex());
-		assertEquals(5, result.getEndTagStartIndex());
-		assertEquals(10, result.getEndTagEndIndex());
-		
-		
-		result = Parser.getNextTagInfo("<foo><bar/></foo>", 0);
+		assertEquals(true, result.hasEnder());
+		assertEquals(0, result.getHeaderStart());
+		assertEquals(4, result.getHeaderEnd());
+		assertEquals(5, result.getEnderStart());
+		assertEquals(10, result.getEnderEnd());
+	}
+	
+	public void testGetTagWithNestedAndEnder() {	
+		TagInfo result = Parser.getNextTagInfo("<foo><bar/></foo>", 0);
 		assertEquals("foo", result.getTagName());
-		assertEquals(true, result.hasEndTag());
-		assertEquals(0, result.getStartTagStartIndex());
-		assertEquals(4, result.getStartTagEndIndex());
-		assertEquals(11, result.getEndTagStartIndex());
-		assertEquals(16, result.getEndTagEndIndex());
+		assertEquals(true, result.hasEnder());
+		assertEquals(0, result.getHeaderStart());
+		assertEquals(4, result.getHeaderEnd());
+		assertEquals(11, result.getEnderStart());
+		assertEquals(16, result.getEnderEnd());
+		
+
+		I_Iterator it = result.getChildren();
+		assertTrue(it.hasNext());
+		TagInfo child = (TagInfo) it.next();
+		assertEquals("bar", child.getTagName());
+		assertEquals(false, child.hasEnder());
+		assertEquals(5, child.getHeaderStart());
+		assertEquals(10, child.getHeaderEnd());
 	}
 	
 	public void testGetTagNextInfoTagStartingInMiddle() {
 		
 		TagInfo result = Parser.getNextTagInfo("<foo><bar/></foo>", 1);
 		assertEquals("bar", result.getTagName());
-		assertEquals(false, result.hasEndTag());
-		assertEquals(5, result.getStartTagStartIndex());
-		assertEquals(10, result.getStartTagEndIndex());
+		assertEquals(false, result.hasEnder());
+		assertEquals(5, result.getHeaderStart());
+		assertEquals(10, result.getHeaderEnd());
+		
+		
 		
 	}
 	
@@ -136,20 +149,34 @@ public class ParserTests extends ATest {
 		
 		TagInfo result = Parser.getNextTagInfo("<foo><bar></foo></bar>", 1);
 		assertEquals("bar", result.getTagName());
-		assertEquals(true, result.hasEndTag());
-		assertEquals(5, result.getStartTagStartIndex());
-		assertEquals(9, result.getStartTagEndIndex());
-		assertEquals(16, result.getEndTagStartIndex());
-		assertEquals(21, result.getEndTagEndIndex());
+		assertEquals(true, result.hasEnder());
+		assertEquals(5, result.getHeaderStart());
+		assertEquals(9, result.getHeaderEnd());
+		assertEquals(16, result.getEnderStart());
+		assertEquals(21, result.getEnderEnd());
 	}
 	
 	public void testGetTagMalformedNoEndTag() {
 		
 		TagInfo result = Parser.getNextTagInfo(
-				"<foo><bar><foo></bar></foo>", 6, 23);
+				"<foo><bar><foo></bar></foo>", 6);
 		assertEquals("foo", result.getTagName());
-		assertEquals(false, result.hasEndTag());
-		assertEquals(10, result.getStartTagStartIndex());
-		assertEquals(14, result.getStartTagEndIndex());
+		assertEquals(true, result.hasEnder());
+		assertEquals(10, result.getHeaderStart());
+		assertEquals(14, result.getHeaderEnd());
+		assertEquals(21, result.getEnderStart());
+		assertEquals(26, result.getEnderEnd());
+	}
+	
+	public void testGetTagNestedTags() {
+		
+		TagInfo result = Parser.getNextTagInfo(
+				"<foo><bar><foo></foo><foo></foo></bar></foo>", 0);
+		assertEquals("foo", result.getTagName());
+		assertEquals(true, result.hasEnder());
+		assertEquals(0, result.getHeaderStart());
+		assertEquals(4, result.getHeaderEnd());
+		assertEquals(38, result.getEnderStart());
+		assertEquals(43, result.getEnderEnd());
 	}
 }
