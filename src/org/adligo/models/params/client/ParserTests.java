@@ -213,4 +213,53 @@ public class ParserTests extends ATest {
 		assertEquals(31, foo2.getEnderEnd());
 		
 	}
+	
+	public void testStringList() {
+		String xml = "<L>" + XMLBuilder.DOS_LINE_FEED
+				+ XMLBuilder.SPACE_INDENT + "<s>a</s>" + XMLBuilder.DOS_LINE_FEED
+				+ XMLBuilder.SPACE_INDENT + "<s>b</s>" + XMLBuilder.DOS_LINE_FEED
+				+ XMLBuilder.SPACE_INDENT + "<s>c</s>" + XMLBuilder.DOS_LINE_FEED
+				+ "</L>" + XMLBuilder.DOS_LINE_FEED;
+		TagInfo info = Parser.getNextTagInfo(xml, 0);
+		assertNotNull(info);
+		
+		assertEquals("L", info.getTagName());
+		assertTrue(info.hasEnder());
+		assertEquals(0, info.getHeaderStart());
+		assertEquals(2, info.getHeaderEnd());
+		assertEquals(44, info.getEnderStart());
+		assertEquals(47, info.getEnderEnd());
+		
+		I_Iterator it =  info.getChildren();
+		assertTrue(it.hasNext());
+		TagInfo stringTag1 = (TagInfo) it.next();
+		
+		assertTrue(it.hasNext());
+		TagInfo stringTag2 = (TagInfo) it.next();
+		
+		assertTrue(it.hasNext());
+		TagInfo stringTag3= (TagInfo) it.next();
+		assertFalse(it.hasNext());
+		
+		assertEquals("s", stringTag1.getTagName());
+		assertTrue(stringTag1.hasEnder());
+		assertEquals(8, stringTag1.getHeaderStart());
+		assertEquals(10, stringTag1.getHeaderEnd());
+		assertEquals(12, stringTag1.getEnderStart());
+		assertEquals(15, stringTag1.getEnderEnd());
+		
+		assertEquals("s", stringTag2.getTagName());
+		assertTrue(stringTag2.hasEnder());
+		assertEquals(21, stringTag2.getHeaderStart());
+		assertEquals(23, stringTag2.getHeaderEnd());
+		assertEquals(25, stringTag2.getEnderStart());
+		assertEquals(28, stringTag2.getEnderEnd());	
+		
+		assertEquals("s", stringTag3.getTagName());
+		assertTrue(stringTag3.hasEnder());
+		assertEquals(34, stringTag3.getHeaderStart());
+		assertEquals(36, stringTag3.getHeaderEnd());
+		assertEquals(38, stringTag3.getEnderStart());
+		assertEquals(41, stringTag3.getEnderEnd());	
+	}
 }
