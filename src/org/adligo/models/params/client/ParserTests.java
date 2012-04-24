@@ -178,5 +178,38 @@ public class ParserTests extends ATest {
 		assertEquals(4, result.getHeaderEnd());
 		assertEquals(38, result.getEnderStart());
 		assertEquals(43, result.getEnderEnd());
+		
+		I_Iterator it =  result.getChildren();
+		assertTrue(it.hasNext());
+		
+		TagInfo bar = (TagInfo)  it.next();
+		assertFalse(it.hasNext());
+		assertEquals(true, bar.hasEnder());
+		assertEquals(5, bar.getHeaderStart());
+		assertEquals(9, bar.getHeaderEnd());
+		assertEquals(32, bar.getEnderStart());
+		assertEquals(37, bar.getEnderEnd());
+		
+		it =  bar.getChildren();
+		assertTrue(it.hasNext());
+		
+		TagInfo foo1 = (TagInfo)  it.next();
+		assertTrue(it.hasNext());
+		
+		TagInfo foo2 = (TagInfo)  it.next();
+		assertFalse(it.hasNext());
+		
+		assertEquals(true, foo1.hasEnder());
+		assertEquals(10, foo1.getHeaderStart());
+		assertEquals(14, foo1.getHeaderEnd());
+		assertEquals(15, foo1.getEnderStart());
+		assertEquals(20, foo1.getEnderEnd());
+		
+		assertEquals(true, foo2.hasEnder());
+		assertEquals(21, foo2.getHeaderStart());
+		assertEquals(25, foo2.getHeaderEnd());
+		assertEquals(26, foo2.getEnderStart());
+		assertEquals(31, foo2.getEnderEnd());
+		
 	}
 }
