@@ -1,7 +1,5 @@
 package org.adligo.models.params.client;
 
-import java.util.Date;
-
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.I_Iterator;
@@ -93,14 +91,14 @@ public class ParserTests extends ATest {
 		TagInfo result = Parser.getNextTagInfo("<foo/>", 0);
 		assertEquals("foo", result.getTagName());
 		assertEquals(false, result.hasEnder());
-		assertEquals(0, result.getHeaderStart());
-		assertEquals(5, result.getHeaderEnd());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(5), result.getHeaderEnd());
 		
 		result = Parser.getNextTagInfo("<foobar/><bar/>", 0);
 		assertEquals("foobar", result.getTagName());
 		assertEquals(false, result.hasEnder());
-		assertEquals(0, result.getHeaderStart());
-		assertEquals(8, result.getHeaderEnd());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(8), result.getHeaderEnd());
 	}
 	
 	public void testGetTagNextInfoTagWithEnder() {
@@ -108,20 +106,20 @@ public class ParserTests extends ATest {
 		TagInfo result = Parser.getNextTagInfo("<foo></foo>", 0);
 		assertEquals("foo", result.getTagName());
 		assertEquals(true, result.hasEnder());
-		assertEquals(0, result.getHeaderStart());
-		assertEquals(4, result.getHeaderEnd());
-		assertEquals(5, result.getEnderStart());
-		assertEquals(10, result.getEnderEnd());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(4), result.getHeaderEnd());
+		assertEquals(new Integer(5), result.getEnderStart());
+		assertEquals(new Integer(10), result.getEnderEnd());
 	}
 	
 	public void testGetTagWithNestedAndEnder() {	
 		TagInfo result = Parser.getNextTagInfo("<foo><bar/></foo>", 0);
 		assertEquals("foo", result.getTagName());
 		assertEquals(true, result.hasEnder());
-		assertEquals(0, result.getHeaderStart());
-		assertEquals(4, result.getHeaderEnd());
-		assertEquals(11, result.getEnderStart());
-		assertEquals(16, result.getEnderEnd());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(4), result.getHeaderEnd());
+		assertEquals(new Integer(11), result.getEnderStart());
+		assertEquals(new Integer(16), result.getEnderEnd());
 		
 
 		I_Iterator it = result.getChildren();
@@ -129,8 +127,8 @@ public class ParserTests extends ATest {
 		TagInfo child = (TagInfo) it.next();
 		assertEquals("bar", child.getTagName());
 		assertEquals(false, child.hasEnder());
-		assertEquals(5, child.getHeaderStart());
-		assertEquals(10, child.getHeaderEnd());
+		assertEquals(new Integer(5), child.getHeaderStart());
+		assertEquals(new Integer(10), child.getHeaderEnd());
 	}
 	
 	public void testGetTagNextInfoTagStartingInMiddle() {
@@ -138,8 +136,8 @@ public class ParserTests extends ATest {
 		TagInfo result = Parser.getNextTagInfo("<foo><bar/></foo>", 1);
 		assertEquals("bar", result.getTagName());
 		assertEquals(false, result.hasEnder());
-		assertEquals(5, result.getHeaderStart());
-		assertEquals(10, result.getHeaderEnd());
+		assertEquals(new Integer(5), result.getHeaderStart());
+		assertEquals(new Integer(10), result.getHeaderEnd());
 		
 		
 		
@@ -150,10 +148,10 @@ public class ParserTests extends ATest {
 		TagInfo result = Parser.getNextTagInfo("<foo><bar></foo></bar>", 1);
 		assertEquals("bar", result.getTagName());
 		assertEquals(true, result.hasEnder());
-		assertEquals(5, result.getHeaderStart());
-		assertEquals(9, result.getHeaderEnd());
-		assertEquals(16, result.getEnderStart());
-		assertEquals(21, result.getEnderEnd());
+		assertEquals(new Integer(5), result.getHeaderStart());
+		assertEquals(new Integer(9), result.getHeaderEnd());
+		assertEquals(new Integer(16), result.getEnderStart());
+		assertEquals(new Integer(21), result.getEnderEnd());
 	}
 	
 	public void testGetTagMalformedNoEndTag() {
@@ -162,10 +160,10 @@ public class ParserTests extends ATest {
 				"<foo><bar><foo></bar></foo>", 6);
 		assertEquals("foo", result.getTagName());
 		assertEquals(true, result.hasEnder());
-		assertEquals(10, result.getHeaderStart());
-		assertEquals(14, result.getHeaderEnd());
-		assertEquals(21, result.getEnderStart());
-		assertEquals(26, result.getEnderEnd());
+		assertEquals(new Integer(10), result.getHeaderStart());
+		assertEquals(new Integer(14), result.getHeaderEnd());
+		assertEquals(new Integer(21), result.getEnderStart());
+		assertEquals(new Integer(26), result.getEnderEnd());
 	}
 	
 
@@ -175,10 +173,10 @@ public class ParserTests extends ATest {
 				"<foo><bar><foo></foo><foo></foo></bar></foo>", 0);
 		assertEquals("foo", result.getTagName());
 		assertEquals(true, result.hasEnder());
-		assertEquals(0, result.getHeaderStart());
-		assertEquals(4, result.getHeaderEnd());
-		assertEquals(38, result.getEnderStart());
-		assertEquals(43, result.getEnderEnd());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(4), result.getHeaderEnd());
+		assertEquals(new Integer(38), result.getEnderStart());
+		assertEquals(new Integer(43), result.getEnderEnd());
 		
 		I_Iterator it =  result.getChildren();
 		assertTrue(it.hasNext());
@@ -186,10 +184,10 @@ public class ParserTests extends ATest {
 		TagInfo bar = (TagInfo)  it.next();
 		assertFalse(it.hasNext());
 		assertEquals(true, bar.hasEnder());
-		assertEquals(5, bar.getHeaderStart());
-		assertEquals(9, bar.getHeaderEnd());
-		assertEquals(32, bar.getEnderStart());
-		assertEquals(37, bar.getEnderEnd());
+		assertEquals(new Integer(5), bar.getHeaderStart());
+		assertEquals(new Integer(9), bar.getHeaderEnd());
+		assertEquals(new Integer(32), bar.getEnderStart());
+		assertEquals(new Integer(37), bar.getEnderEnd());
 		
 		it =  bar.getChildren();
 		assertTrue(it.hasNext());
@@ -201,16 +199,16 @@ public class ParserTests extends ATest {
 		assertFalse(it.hasNext());
 		
 		assertEquals(true, foo1.hasEnder());
-		assertEquals(10, foo1.getHeaderStart());
-		assertEquals(14, foo1.getHeaderEnd());
-		assertEquals(15, foo1.getEnderStart());
-		assertEquals(20, foo1.getEnderEnd());
+		assertEquals(new Integer(10), foo1.getHeaderStart());
+		assertEquals(new Integer(14), foo1.getHeaderEnd());
+		assertEquals(new Integer(15), foo1.getEnderStart());
+		assertEquals(new Integer(20), foo1.getEnderEnd());
 		
 		assertEquals(true, foo2.hasEnder());
-		assertEquals(21, foo2.getHeaderStart());
-		assertEquals(25, foo2.getHeaderEnd());
-		assertEquals(26, foo2.getEnderStart());
-		assertEquals(31, foo2.getEnderEnd());
+		assertEquals(new Integer(21), foo2.getHeaderStart());
+		assertEquals(new Integer(25), foo2.getHeaderEnd());
+		assertEquals(new Integer(26), foo2.getEnderStart());
+		assertEquals(new Integer(31), foo2.getEnderEnd());
 		
 	}
 	
@@ -225,10 +223,10 @@ public class ParserTests extends ATest {
 		
 		assertEquals("L", info.getTagName());
 		assertTrue(info.hasEnder());
-		assertEquals(0, info.getHeaderStart());
-		assertEquals(2, info.getHeaderEnd());
-		assertEquals(44, info.getEnderStart());
-		assertEquals(47, info.getEnderEnd());
+		assertEquals(new Integer(0), info.getHeaderStart());
+		assertEquals(new Integer(2), info.getHeaderEnd());
+		assertEquals(new Integer(44), info.getEnderStart());
+		assertEquals(new Integer(47), info.getEnderEnd());
 		
 		I_Iterator it =  info.getChildren();
 		assertTrue(it.hasNext());
@@ -243,23 +241,42 @@ public class ParserTests extends ATest {
 		
 		assertEquals("s", stringTag1.getTagName());
 		assertTrue(stringTag1.hasEnder());
-		assertEquals(8, stringTag1.getHeaderStart());
-		assertEquals(10, stringTag1.getHeaderEnd());
-		assertEquals(12, stringTag1.getEnderStart());
-		assertEquals(15, stringTag1.getEnderEnd());
+		assertEquals(new Integer(8), stringTag1.getHeaderStart());
+		assertEquals(new Integer(10), stringTag1.getHeaderEnd());
+		assertEquals(new Integer(12), stringTag1.getEnderStart());
+		assertEquals(new Integer(15), stringTag1.getEnderEnd());
 		
 		assertEquals("s", stringTag2.getTagName());
 		assertTrue(stringTag2.hasEnder());
-		assertEquals(21, stringTag2.getHeaderStart());
-		assertEquals(23, stringTag2.getHeaderEnd());
-		assertEquals(25, stringTag2.getEnderStart());
-		assertEquals(28, stringTag2.getEnderEnd());	
+		assertEquals(new Integer(21), stringTag2.getHeaderStart());
+		assertEquals(new Integer(23), stringTag2.getHeaderEnd());
+		assertEquals(new Integer(25), stringTag2.getEnderStart());
+		assertEquals(new Integer(28), stringTag2.getEnderEnd());	
 		
 		assertEquals("s", stringTag3.getTagName());
 		assertTrue(stringTag3.hasEnder());
-		assertEquals(34, stringTag3.getHeaderStart());
-		assertEquals(36, stringTag3.getHeaderEnd());
-		assertEquals(38, stringTag3.getEnderStart());
-		assertEquals(41, stringTag3.getEnderEnd());	
+		assertEquals(new Integer(34), stringTag3.getHeaderStart());
+		assertEquals(new Integer(36), stringTag3.getHeaderEnd());
+		assertEquals(new Integer(38), stringTag3.getEnderStart());
+		assertEquals(new Integer(41), stringTag3.getEnderEnd());	
+	}
+	
+	
+	public void testSubstring() {
+		String xml = "<L>" + XMLBuilder.DOS_LINE_FEED
+				+ XMLBuilder.SPACE_INDENT + "<s>a</s>" + XMLBuilder.DOS_LINE_FEED
+				+ XMLBuilder.SPACE_INDENT + "<s>b</s>" + XMLBuilder.DOS_LINE_FEED
+				+ XMLBuilder.SPACE_INDENT + "<s>c</s>" + XMLBuilder.DOS_LINE_FEED
+				+ "</L>" + XMLBuilder.DOS_LINE_FEED;
+		String xmlChunk = Parser.substring(xml, null);
+		assertEquals("", xmlChunk);	
+		
+		TagInfoMutant mut = new TagInfoMutant();
+		mut.setTagName("po");
+		mut.setHeaderStart(0);
+		mut.setHeaderEnd(12);
+		TagInfo info = new TagInfo(mut);
+		xmlChunk = Parser.substring(null, info);
+		assertEquals("", xmlChunk);	
 	}
 }
