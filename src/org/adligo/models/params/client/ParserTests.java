@@ -279,4 +279,25 @@ public class ParserTests extends ATest {
 		xmlChunk = Parser.substring(null, info);
 		assertEquals("", xmlChunk);	
 	}
+	
+	public void testGetAttribute() {
+		String xml = "<L n=\"1\" f=\"2\" j=\"3\"/>" ;
+		
+		TagInfoMutant mut = new TagInfoMutant();
+		mut.setTagName("L");
+		mut.setHeaderStart(0);
+		mut.setHeaderEnd(xml.length() -1);
+		TagInfo info = new TagInfo(mut);
+		TagAttribute atrib = Parser.getNextAttribute(info, xml, 0);
+		assertEquals("n", atrib.getName());
+		assertEquals("1", atrib.getValue());
+		
+		atrib = Parser.getNextAttribute(info, xml, 1);
+		assertEquals("f", atrib.getName());
+		assertEquals("2", atrib.getValue());
+		
+		atrib = Parser.getNextAttribute(info, xml, 2);
+		assertEquals("j", atrib.getName());
+		assertEquals("3", atrib.getValue());
+	}
 }
