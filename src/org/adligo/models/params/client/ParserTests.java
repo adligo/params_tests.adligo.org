@@ -288,15 +288,17 @@ public class ParserTests extends ATest {
 		mut.setHeaderStart(0);
 		mut.setHeaderEnd(xml.length() -1);
 		TagInfo info = new TagInfo(mut);
-		TagAttribute atrib = Parser.getNextAttribute(info, xml, 0);
+		I_Iterator it = Parser.getAttributes(info, xml);
+		
+		TagAttribute atrib = (TagAttribute) it.next();
 		assertEquals("n", atrib.getName());
 		assertEquals("1", atrib.getValue());
 		
-		atrib = Parser.getNextAttribute(info, xml, 1);
+		atrib = (TagAttribute) it.next();
 		assertEquals("f", atrib.getName());
 		assertEquals("2", atrib.getValue());
 		
-		atrib = Parser.getNextAttribute(info, xml, 2);
+		atrib = (TagAttribute) it.next();
 		assertEquals("j", atrib.getName());
 		assertEquals("3", atrib.getValue());
 	}
