@@ -261,6 +261,12 @@ public class ParserTests extends ATest {
 		assertEquals(new Integer(41), stringTag3.getEnderEnd());	
 	}
 	
+	public void testMultiCharacterNameTag() {
+		String xml = "<ctm a=\"3\" b=\"4\"/>";
+		
+		TagInfo result = Parser.getNextTagInfo(xml, 0);
+		assertEquals("ctm", result.getTagName());
+	}
 	
 	public void testSubstring() {
 		String xml = "<L>" + XMLBuilder.DOS_LINE_FEED
