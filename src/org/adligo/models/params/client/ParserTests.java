@@ -308,4 +308,14 @@ public class ParserTests extends ATest {
 		assertEquals("j", atrib.getName());
 		assertEquals("3", atrib.getValue());
 	}
+	
+	public void testEscapeForXml() {
+		String result = Parser.escapeForXml("\"'<>&");
+		assertEquals("&quot;&apos;&lt;&gt;&amp;", result);
+	}
+	
+	public void testUnescapeForXml() {
+		String result = Parser.unescapeFromXml("&quot;&apos;&lt;&gt;&amp;");
+		assertEquals("\"'<>&", result);
+	}
 }
