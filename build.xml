@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." default="test" name="params_tests">
+<project basedir="." default="jar_and_test" name="params_tests">
 	<import file="${user.home}/conf/adligo/build.xml"/>
 </project>
