@@ -344,6 +344,48 @@ public class ParserTests extends ATest {
 		assertFalse(child.getChildren().hasNext());
 	}
 
+	public void testGetTagMalformedText2() {
+		
+		TagInfo result = Parser.getNextTagInfo(
+				"<foo><bar><=</bar></foo>", 0);
+		assertEquals("foo", result.getTagName());
+		assertEquals(true, result.hasEnder());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(4), result.getHeaderEnd());
+		assertEquals(new Integer(18), result.getEnderStart());
+		assertEquals(new Integer(23), result.getEnderEnd());
+		
+		TagInfo child = (TagInfo) result.getChildren().next();
+		assertNotNull(child);
+		assertEquals(true, child.hasEnder());
+		assertEquals(new Integer(5), child.getHeaderStart());
+		assertEquals(new Integer(9), child.getHeaderEnd());
+		assertEquals(new Integer(12), child.getEnderStart());
+		assertEquals(new Integer(17), child.getEnderEnd());
+		assertFalse(child.getChildren().hasNext());
+	}
+	
+	public void testGetTagMalformedText3() {
+		
+		TagInfo result = Parser.getNextTagInfo(
+				"<foo><bar><= </bar></foo>", 0);
+		assertEquals("foo", result.getTagName());
+		assertEquals(true, result.hasEnder());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(4), result.getHeaderEnd());
+		assertEquals(new Integer(19), result.getEnderStart());
+		assertEquals(new Integer(24), result.getEnderEnd());
+		
+		TagInfo child = (TagInfo) result.getChildren().next();
+		assertNotNull(child);
+		assertEquals(true, child.hasEnder());
+		assertEquals(new Integer(5), child.getHeaderStart());
+		assertEquals(new Integer(9), child.getHeaderEnd());
+		assertEquals(new Integer(13), child.getEnderStart());
+		assertEquals(new Integer(18), child.getEnderEnd());
+		assertFalse(child.getChildren().hasNext());
+	}
+	
 	public void testSimpleMalformGreaterThanTemplate() throws Exception {
 		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/Escapes.xml");
 		TagInfo result = Parser.getNextTagInfo(xml,0);
