@@ -3,6 +3,7 @@ package org.adligo.models.params.client;
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.I_Iterator;
+import org.adligo.i.util.test_utils.UTF8_IOUtil;
 import org.adligo.tests.ATest;
 
 public class ParserTests extends ATest {
@@ -152,6 +153,7 @@ public class ParserTests extends ATest {
 		assertEquals(new Integer(9), result.getHeaderEnd());
 		assertEquals(new Integer(16), result.getEnderStart());
 		assertEquals(new Integer(21), result.getEnderEnd());
+		assertFalse(result.getChildren().hasNext());
 	}
 	
 	public void testGetTagMalformedNoEndTag() {
@@ -281,6 +283,7 @@ public class ParserTests extends ATest {
 		mut.setTagName("po");
 		mut.setHeaderStart(0);
 		mut.setHeaderEnd(12);
+		mut.setHasEnder(false);
 		TagInfo info = new TagInfo(mut);
 		xmlChunk = Parser.substring(null, info);
 		assertEquals("", xmlChunk);	
@@ -293,6 +296,7 @@ public class ParserTests extends ATest {
 		mut.setTagName("L");
 		mut.setHeaderStart(0);
 		mut.setHeaderEnd(xml.length() -1);
+		mut.setHasEnder(false);
 		TagInfo info = new TagInfo(mut);
 		I_Iterator it = Parser.getAttributes(info, xml);
 		
@@ -317,5 +321,43 @@ public class ParserTests extends ATest {
 	public void testUnescapeForXml() {
 		String result = Parser.unescapeFromXml("&quot;&apos;&lt;&gt;&amp;");
 		assertEquals("\"'<>&", result);
+	}
+	
+	public void testGetTagMalformedText() {
+		
+		TagInfo result = Parser.getNextTagInfo(
+				"<foo><bar>><><</bar></foo>", 0);
+		assertEquals("foo", result.getTagName());
+		assertEquals(true, result.hasEnder());
+		assertEquals(new Integer(0), result.getHeaderStart());
+		assertEquals(new Integer(4), result.getHeaderEnd());
+		assertEquals(new Integer(20), result.getEnderStart());
+		assertEquals(new Integer(25), result.getEnderEnd());
+		
+		TagInfo child = (TagInfo) result.getChildren().next();
+		assertNotNull(child);
+		assertEquals(true, child.hasEnder());
+		assertEquals(new Integer(5), child.getHeaderStart());
+		assertEquals(new Integer(9), child.getHeaderEnd());
+		assertEquals(new Integer(14), child.getEnderStart());
+		assertEquals(new Integer(19), child.getEnderEnd());
+		assertFalse(child.getChildren().hasNext());
+	}
+
+	public void testSimpleMalformGreaterThanTemplate() throws Exception {
+		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/Escapes.xml");
+		TagInfo result = Parser.getNextTagInfo(xml,0);
+		
+	}
+	public void testXmlDoc() throws Exception {
+		
+		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/PersonsSQL.xml");
+		TagInfo result = Parser.getNextTagInfo(xml,0);
+	}
+	
+	public void testPersonsDisplay() throws Exception {
+		
+		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/PersonsDisplay.xml");
+		TagInfo result = Parser.getNextTagInfo(xml,5);
 	}
 }
