@@ -3,7 +3,7 @@ package org.adligo.models.params.client;
 import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.util.client.I_Iterator;
-import org.adligo.i.util.test_utils.UTF8_IOUtil;
+import org.adligo.jse.util.UTF8_IOUtil;
 import org.adligo.tests.ATest;
 
 public class ParserTests extends ATest {
