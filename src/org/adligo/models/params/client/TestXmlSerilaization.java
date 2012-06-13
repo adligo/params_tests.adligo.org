@@ -1,6 +1,8 @@
 package org.adligo.models.params.client;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -209,6 +211,29 @@ public class TestXmlSerilaization extends ATest {
 		assertEquals(params, newParams);
 	}
 	
+	public void testBigDecimalParamSerilaization() throws Exception {
+		I_TemplateParams params = getBigDecimalParam();
+		
+		String asXml = params.writeXML();
+		if (log.isDebugEnabled()) {
+			log.debug("wrote \n"  + asXml);
+		}
+		/*
+		I_LogMutant log = (I_LogMutant) LogFactory.getLog(Param.class);
+		log.setLevel(DeferredLog.LOG_LEVEL_DEBUG);
+		*/
+		Object result = XMLObject.readXML(asXml);
+		assertTrue(result instanceof Param);
+		Param newParams = (Param) result;
+
+
+		if (log.isDebugEnabled()) {
+			log.debug("read in to \n\n\n"  + newParams.writeXML());
+		}
+		assertEquals(params, newParams);
+	}
+	
+	
 	public I_MultipleParamsObject getParams() throws ParseException {
 		I_MultipleParamsObject params = new Params();
 		Param startParam = new Param();
@@ -248,6 +273,22 @@ public class TestXmlSerilaization extends ATest {
 		stringParam.setName("Boolean");
 		stringParam.setOperators(new String [] {"NOT", "IN"});
 		stringParam.addValue(true);
+		return stringParam;
+	}
+	
+	public Param getBigDecimalParam() {
+		Param stringParam = new Param();
+		stringParam.setName("BigDecimal");
+		stringParam.setOperators(new String [] {"="});
+		stringParam.addValue(new BigDecimal("101.01"));
+		return stringParam;
+	}
+	
+	public Param getBigIntegerParam() {
+		Param stringParam = new Param();
+		stringParam.setName("BigInteger");
+		stringParam.setOperators(new String [] {"NOT", "IN"});
+		stringParam.addValue(new BigInteger("99999"));
 		return stringParam;
 	}
 	
