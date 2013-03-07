@@ -41,6 +41,7 @@ public class EightBitTest extends ATest {
 			assertEquals(8, binString.length());
 			EightBit eb = new EightBit(binString);
 			assertEquals(counter, eb.unsigned());
+			assertEquals(binString, eb.toOnesAndZeros());
 			counter++;
 		}
 	}
