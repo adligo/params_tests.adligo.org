@@ -18,6 +18,32 @@ public class EightBitTest extends ATest {
 		}
 	}
 	
+	public void testEightBitStringConstructorAndUnsignedValue() {
+		int counter = 0;
+		for (int i = 0; i < 2; i++) {
+			
+			String binString = Integer.toBinaryString(i);
+			if (i <= 1) {
+				binString = "0000000" + binString;
+			} else if (i <= 3) {
+				binString = "000000" + binString;
+			} else if (i <= 7) {
+				binString = "00000" + binString;
+			} else if (i <= 15) {
+				binString = "0000" + binString;
+			} else if (i <= 15) {
+				binString = "000" + binString;
+			} else if (i <= 31) {
+				binString = "00" + binString;
+			} else if (i <= 63) {
+				binString = "0" + binString;
+			}
+			assertEquals(8, binString.length());
+			EightBit eb = new EightBit(binString);
+			assertEquals(counter, eb.unsigned());
+			counter++;
+		}
+	}
 	
 	public void testEightBitCopy() {
 		
