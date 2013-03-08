@@ -16,6 +16,15 @@ public class EightBitTest extends ATest {
 			assertEquals(counter, eb.unsigned());
 			counter++;
 		}
+		
+		EightBit eb = new EightBit("0000");
+		assertEquals(0, eb.unsigned());
+		eb = new EightBit("0001");
+		assertEquals(1, eb.unsigned());
+		eb = new EightBit("0010");
+		assertEquals(2, eb.unsigned());
+		eb = new EightBit("0011");
+		assertEquals(3, eb.unsigned());
 	}
 	
 	public void testEightBitStringConstructorAndUnsignedValue() {
