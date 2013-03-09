@@ -1,9 +1,12 @@
 package org.adligo.models.params.client;
 
+import org.adligo.i.log.client.Log;
+import org.adligo.i.log.client.LogFactory;
 import org.adligo.tests.ATest;
 
 public class EightBitTest extends ATest {
-
+	private static final Log log = LogFactory.getLog(EightBitTest.class);
+	
 	public void testEightBitConstructorAndUnsignedValue() {
 		int counter = 0;
 		for (byte i = 0; i < Byte.MAX_VALUE; i++) {
@@ -107,4 +110,16 @@ public class EightBitTest extends ATest {
 		assertEquals(right + 64 + 32 + 16, eb.unsigned());
 	}
 	
+
+	public void testToAscii() {
+		int counter = 0;
+		for (byte i = 0; i < Byte.MAX_VALUE; i++) {
+			EightBit eb = new EightBit(i);
+			assertEquals(counter, eb.unsigned());
+			assertEquals(i, eb.toByte());
+			
+			log.debug("ascii was:" + eb.toCharAsciiUtf8());
+			counter++;
+		}
+	}
 }
