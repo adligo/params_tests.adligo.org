@@ -23,17 +23,6 @@ public class TagInfoTests extends ATest {
 			caught = x;
 		}
 		assertNotNull(caught);
-		assertEquals(TagInfoMutant.TAG_INFO_REQUIRES_2_INDEXES, caught.getMessage());
-		
-		mut.setHeaderStart(-1);
-		mut.setHeaderEnd(-1);
-		caught = null;
-		try {
-			mut.validate();
-		} catch (IllegalArgumentException x) {
-			caught = x;
-		}
-		assertNotNull(caught);
 		assertEquals(TagInfoMutant.TAG_INFO_INDEXES_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO, caught.getMessage());
 		
 		mut.setHeaderStart(0);
@@ -75,7 +64,7 @@ public class TagInfoTests extends ATest {
 			caught = x;
 		}
 		assertNotNull(caught);
-		assertEquals(TagInfoMutant.TAG_INFO_REQUIRES_2_INDEXES, caught.getMessage());
+		assertEquals(TagInfoMutant.TAG_INFO_INDEXES_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO, caught.getMessage());
 		
 		mut = new TagInfoMutant();
 		mut.setTagName("a");
@@ -89,9 +78,9 @@ public class TagInfoTests extends ATest {
 			caught = x;
 		}
 		assertNotNull(caught);
-		assertEquals(TagInfoMutant.TAG_INFO_REQUIRES_2_INDEXES, caught.getMessage());
+		assertEquals(TagInfoMutant.TAG_INFO_INDEXES_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO, caught.getMessage());
 		
-		mut.setEnderStart(-1);
+		mut.setEnderEnd(-2);
 		caught = null;
 		try {
 			mut.validate();
@@ -123,18 +112,8 @@ public class TagInfoTests extends ATest {
 		assertNotNull(caught);
 		assertEquals(TagInfoMutant.THE_END_TAG_START_INDEX_MUST_BE_BEFORE_THE_END_TAG_END_INDEX, caught.getMessage());
 		
-		mut.setHasEnder(false);
 		mut.setEnderEnd(6);
 		mut.setEnderStart(4);
-		caught = null;
-		try {
-			mut.validate();
-		} catch (IllegalArgumentException x) {
-			caught = x;
-		}
-		assertNotNull(caught);
-		assertEquals(TagInfoMutant.THE_ENDER_FLAG_SHOULD_MATCH_THE_FACT_THAT_THERE_ARE_ENDER_INTEGERS, caught.getMessage());
-		
 		mut.setHasEnder(true);
 		caught = null;
 		mut.validate();

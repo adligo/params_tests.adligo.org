@@ -1,7 +1,7 @@
-<object class="Params" version="1.6"  name="params" >
-   <object class="Param" version="1.6" name="Where">
-      <object class="Params" version="1.6"  name="params" >
-         <object class="Param" version="1.6" name="Float">
+<object class="Params" version="1.7"  name="params" >
+   <object class="Param" version="1.7" name="Where">
+      <object class="Params" version="1.7"  name="params" >
+         <object class="Param" version="1.7" name="Float">
             <object name="operators">
                <object>&lt;&gt;</object>
             </object>
@@ -9,7 +9,7 @@
                <object class="Float">1.1</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="Double">
+         <object class="Param" version="1.7" name="Double">
             <object name="operators">
                <object>&lt;</object>
             </object>
@@ -17,7 +17,7 @@
                <object class="Double">1.1</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="Long">
+         <object class="Param" version="1.7" name="Long">
             <object name="operators">
                <object>=</object>
             </object>
@@ -25,7 +25,7 @@
                <object class="Long">-976631500</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="Date">
+         <object class="Param" version="1.7" name="Date">
             <object name="operators">
                <object>between</object>
             </object>
@@ -34,7 +34,7 @@
                <object class="Date">1007186400000</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="String">
+         <object class="Param" version="1.7" name="String">
             <object name="operators">
                <object>NOT</object>
                <object>IN</object>
@@ -45,7 +45,7 @@
                <object class="String">c</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="Short">
+         <object class="Param" version="1.7" name="Short">
             <object name="operators">
                <object>&gt;</object>
             </object>
@@ -53,7 +53,7 @@
                <object class="Short">10</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="Boolean">
+         <object class="Param" version="1.7" name="Boolean">
             <object name="operators">
                <object>NOT</object>
                <object>IN</object>
@@ -62,7 +62,7 @@
                <object class="Boolean">true</object>
             </object>
          </object>
-         <object class="Param" version="1.6" name="Integer">
+         <object class="Param" version="1.7" name="Integer">
             <object name="operators">
                <object>&gt;=</object>
             </object>
@@ -72,7 +72,7 @@
          </object>
       </object>
    </object>
-   <object class="Param" version="1.6" name="EndRow">
+   <object class="Param" version="1.7" name="EndRow">
       <object name="operators">
          <object>&quot;</object>
          <object>&amp;</object>
@@ -81,10 +81,10 @@
          <object class="Integer">20</object>
       </object>
    </object>
-   <object class="Param" version="1.6" name="StartRow">
+   <object class="Param" version="1.7" name="StartRow">
       <object name="values" >
          <object class="Integer">10</object>
       </object>
    </object>
-   <object class="Param" version="1.6" name="OnlyNameAndId" />
+   <object class="Param" version="1.7" name="OnlyNameAndId" />
 </object>

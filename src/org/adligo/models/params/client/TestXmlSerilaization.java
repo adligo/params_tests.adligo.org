@@ -280,7 +280,7 @@ public class TestXmlSerilaization extends ATest {
 		Param stringParam = new Param();
 		stringParam.setName("BigDecimal");
 		stringParam.setOperators(new String [] {"="});
-		stringParam.addValue(new BigDecimal("101.01"));
+		stringParam.addValueBigDecimal("101.01");
 		return stringParam;
 	}
 	
@@ -288,7 +288,7 @@ public class TestXmlSerilaization extends ATest {
 		Param stringParam = new Param();
 		stringParam.setName("BigInteger");
 		stringParam.setOperators(new String [] {"NOT", "IN"});
-		stringParam.addValue(new BigInteger("99999"));
+		stringParam.addValueBigInteger("99999");
 		return stringParam;
 	}
 	
