@@ -1,9 +1,15 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
-import org.adligo.i.log.client.Log;
-import org.adligo.i.log.client.LogFactory;
-import org.adligo.i.util.client.I_Iterator;
+import org.adligo.i.log.shared.Log;
+import org.adligo.i.log.shared.LogFactory;
+import org.adligo.i.util.shared.I_Iterator;
 import org.adligo.jse.util.UTF8_IOUtil;
+import org.adligo.models.params.shared.Parser;
+import org.adligo.models.params.shared.TagAttribute;
+import org.adligo.models.params.shared.TagInfo;
+import org.adligo.models.params.shared.TagInfoMutant;
+import org.adligo.models.params.shared.XMLBuilder;
+import org.adligo.models.params.shared.XMLObject;
 import org.adligo.tests.ATest;
 
 public class ParserTests extends ATest {

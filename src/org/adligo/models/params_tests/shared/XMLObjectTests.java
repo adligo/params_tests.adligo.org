@@ -1,5 +1,7 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
+import org.adligo.models.params.shared.ClassInfo;
+import org.adligo.models.params.shared.XMLObject;
 import org.adligo.tests.ATest;
 
 public class XMLObjectTests extends ATest {

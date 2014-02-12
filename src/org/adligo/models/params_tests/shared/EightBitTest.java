@@ -1,7 +1,8 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
-import org.adligo.i.log.client.Log;
-import org.adligo.i.log.client.LogFactory;
+import org.adligo.i.log.shared.Log;
+import org.adligo.i.log.shared.LogFactory;
+import org.adligo.models.params.shared.EightBit;
 import org.adligo.tests.ATest;
 
 public class EightBitTest extends ATest {

@@ -1,7 +1,8 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
 import java.util.Date;
 
+import org.adligo.models.params.shared.Params;
 import org.adligo.tests.ATest;
 
 public class ParamsTests extends ATest {

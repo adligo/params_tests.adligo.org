@@ -1,8 +1,9 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
-import org.adligo.i.log.client.Log;
-import org.adligo.i.log.client.LogFactory;
+import org.adligo.i.log.shared.Log;
+import org.adligo.i.log.shared.LogFactory;
 import org.adligo.jse.util.JSECommonInit;
+import org.adligo.models.params.shared.Base64;
 import org.adligo.tests.ATest;
 
 public class Base64Tests extends ATest {

@@ -1,5 +1,8 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
+import org.adligo.models.params.shared.LimitOffset;
+import org.adligo.models.params.shared.Params;
+import org.adligo.models.params.shared.ParamsFactory;
 import org.adligo.tests.ATest;
 
 public class ParamsFactoryTests extends ATest {

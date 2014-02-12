@@ -1,4 +1,4 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -7,8 +7,14 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.adligo.i.log.client.Log;
-import org.adligo.i.log.client.LogFactory;
+import org.adligo.i.log.shared.Log;
+import org.adligo.i.log.shared.LogFactory;
+import org.adligo.models.params.shared.I_MultipleParamsObject;
+import org.adligo.models.params.shared.I_TemplateParams;
+import org.adligo.models.params.shared.I_XMLBuilder;
+import org.adligo.models.params.shared.Param;
+import org.adligo.models.params.shared.Params;
+import org.adligo.models.params.shared.XMLObject;
 import org.adligo.tests.ATest;
 
 public class TestXmlSerilaization extends ATest {

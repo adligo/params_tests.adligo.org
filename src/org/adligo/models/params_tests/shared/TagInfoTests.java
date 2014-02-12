@@ -1,5 +1,6 @@
-package org.adligo.models.params.client;
+package org.adligo.models.params_tests.shared;
 
+import org.adligo.models.params.shared.TagInfoMutant;
 import org.adligo.tests.ATest;
 
 public class TagInfoTests extends ATest {
