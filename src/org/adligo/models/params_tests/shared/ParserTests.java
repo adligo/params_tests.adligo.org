@@ -393,19 +393,19 @@ public class ParserTests extends ATest {
 	}
 	
 	public void testSimpleMalformGreaterThanTemplate() throws Exception {
-		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/Escapes.xml");
+		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params_tests/shared/Escapes.xml");
 		TagInfo result = Parser.getNextTagInfo(xml,0);
 		
 	}
 	public void testXmlDoc() throws Exception {
 		
-		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/PersonsSQL.xml");
+		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params_tests/shared/PersonsSQL.xml");
 		TagInfo result = Parser.getNextTagInfo(xml,0);
 	}
 	
 	public void testPersonsDisplay() throws Exception {
 		
-		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params/client/PersonsDisplay.xml");
+		String xml = UTF8_IOUtil.getXMLContent("/org/adligo/models/params_tests/shared/PersonsDisplay.xml");
 		TagInfo result = Parser.getNextTagInfo(xml,5);
 	}
 }

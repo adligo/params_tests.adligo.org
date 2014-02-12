@@ -2,4 +2,4 @@ Date,Package,Coverage,Instructions
 11/14/2012,org.adligo.models.params.client,57.4%,7695
 2/2/2014,org.adligo.models.params.client,63.4%,7917
 #it went down because of package isolation
-4/11/2014,org.adligo.models.params.shared,58.6%,7917
+4/11/2014,org.adligo.models.params.shared,59.6%,7917
