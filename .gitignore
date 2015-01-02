@@ -1,6 +1,8 @@
-classes_e/
-classes/
-bin/
+/bin/
+/build/
+/classes_e/
+/classes/
+
 params_tests*.jar
 test_failure.properties
 test_reports/
