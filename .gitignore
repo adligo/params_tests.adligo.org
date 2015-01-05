@@ -5,4 +5,4 @@
 
 params_tests*.jar
 test_failure.properties
-test_reports/
+/test_reports/
